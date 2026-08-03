@@ -584,8 +584,7 @@
           throw new Error('当前账号没有可登录的工作区');
         }
 
-        const tokenPair = await createWorkspaceSession(workspace.loginToken);
-        await applyChinesePreferences(tokenPair, account, false);
+        await createWorkspaceSession(workspace.loginToken);
       };
 
       const register = async (account, password) => {
