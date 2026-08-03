@@ -9,6 +9,7 @@ services:
       - ./gateway/nginx.conf:/etc/nginx/conf.d/default.conf:ro
       - ./gateway/account-login.html:/usr/share/nginx/html/account-login.html:ro
       - ./gateway/change-password.html:/usr/share/nginx/html/change-password.html:ro
+      - ./gateway/guide.html:/usr/share/nginx/html/guide.html:ro
     depends_on:
       server:
         condition: service_healthy

@@ -294,7 +294,11 @@
           <button id="submit-button" class="primary-button" type="submit">登录</button>
           <p id="mode-hint" class="hint">首次登录成功后，本设备 30 天内可免密进入。</p>
           <p id="message" class="message" role="alert" aria-live="polite"></p>
-          <p class="secondary-actions"><a href="/change-password">修改密码</a></p>
+          <p class="secondary-actions">
+            <a href="/change-password">修改密码</a>
+            <span aria-hidden="true"> · </span>
+            <a href="/guide">使用指南</a>
+          </p>
         </form>
 
         <div id="remembered-session" class="remembered" hidden>
