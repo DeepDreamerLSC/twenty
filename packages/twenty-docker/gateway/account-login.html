@@ -178,6 +178,26 @@
         text-align: center;
       }
 
+      .message.success {
+        color: #15803d;
+      }
+
+      .secondary-actions {
+        margin: 4px 0 0;
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .secondary-actions a {
+        color: #5046e5;
+        font-weight: 650;
+        text-decoration: none;
+      }
+
+      .secondary-actions a:hover {
+        text-decoration: underline;
+      }
+
       .auth-note {
         margin: 4px 0 0;
         color: #778096;
@@ -274,6 +294,7 @@
           <button id="submit-button" class="primary-button" type="submit">登录</button>
           <p id="mode-hint" class="hint">首次登录成功后，本设备 30 天内可免密进入。</p>
           <p id="message" class="message" role="alert" aria-live="polite"></p>
+          <p class="secondary-actions"><a href="/change-password">修改密码</a></p>
         </form>
 
         <div id="remembered-session" class="remembered" hidden>
@@ -645,6 +666,7 @@
           : '首次登录成功后，本设备 30 天内可免密进入。';
         rememberedSession.hidden = isRegistering || !hasExistingSession;
         message.textContent = '';
+        message.classList.remove('success');
         passwordInput.value = '';
         confirmPasswordInput.value = '';
       };
@@ -660,6 +682,13 @@
 
       setAuthMode(initialMode);
 
+      if (
+        new URLSearchParams(window.location.search).get('passwordChanged') === '1'
+      ) {
+        message.textContent = '密码已修改，请使用新密码登录。';
+        message.classList.add('success');
+      }
+
       const isSwitchAccountRequested =
         new URLSearchParams(window.location.search).get('switch') === '1';
 
@@ -674,6 +703,7 @@
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
         message.textContent = '';
+        message.classList.remove('success');
         submitButton.disabled = true;
         submitButton.textContent =
           authMode === 'register' ? '正在注册…' : '正在登录…';
