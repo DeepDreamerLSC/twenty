@@ -9,13 +9,17 @@ import { currentWorkspaceMembersState } from '@/auth/states/currentWorkspaceMemb
 import { currentWorkspaceState } from '@/auth/states/currentWorkspaceState';
 import { isCurrentUserLoadedState } from '@/auth/states/isCurrentUserLoadedState';
 import { useInitializeFormatPreferences } from '@/localization/hooks/useInitializeFormatPreferences';
+import { resolvePreferredLocale } from '@/localization/utils/resolvePreferredLocale';
+import { useInvalidateMetadataStore } from '@/metadata-store/hooks/useInvalidateMetadataStore';
+import { useUpdateWorkspaceMemberSettings } from '@/settings/profile/hooks/useUpdateWorkspaceMemberSettings';
 import { getDateFnsLocale } from '@/ui/field/display/utils/getDateFnsLocale';
 import { useSetAtomState } from '@/ui/utilities/state/jotai/hooks/useSetAtomState';
 import { type ColorScheme } from '@/workspace-member/types/WorkspaceMember';
+import { i18n } from '@lingui/core';
 import { enUS } from 'date-fns/locale';
 import { useStore } from 'jotai';
 import { useCallback, useEffect, useState } from 'react';
-import { type APP_LOCALES, SOURCE_LOCALE } from 'twenty-shared/translations';
+import { type APP_LOCALES } from 'twenty-shared/translations';
 import { type ObjectPermissions } from 'twenty-shared/types';
 import { isDefined } from 'twenty-shared/utils';
 import { useQuery } from '@apollo/client/react';
@@ -25,6 +29,7 @@ import {
 } from '~/generated-metadata/graphql';
 import { dateLocaleState } from '~/localization/states/dateLocaleState';
 import { dynamicActivate } from '~/utils/i18n/dynamicActivate';
+import { logError } from '~/utils/logError';
 
 export const UserMetadataProviderInitialEffect = () => {
   const hasAccessTokenPair = useHasAccessTokenPair();
@@ -47,6 +52,8 @@ export const UserMetadataProviderInitialEffect = () => {
   const setIsCurrentUserLoaded = useSetAtomState(isCurrentUserLoadedState);
 
   const { initializeFormatPreferences } = useInitializeFormatPreferences();
+  const { updateWorkspaceMemberSettings } = useUpdateWorkspaceMemberSettings();
+  const { invalidateMetadataStore } = useInvalidateMetadataStore();
 
   const updateLocaleCatalog = useCallback(
     async (newLocale: keyof typeof APP_LOCALES) => {
@@ -124,30 +131,53 @@ export const UserMetadataProviderInitialEffect = () => {
       availableWorkspaces,
     } = userQueryData.currentUser;
 
-    const affectDefaultValuesOnEmptyWorkspaceMemberFields = (
-      workspaceMember: WorkspaceMember,
-    ) => {
+    const affectDefaultValuesOnEmptyWorkspaceMemberFields = ({
+      workspaceMember,
+      locale,
+    }: {
+      workspaceMember: WorkspaceMember;
+      locale: keyof typeof APP_LOCALES;
+    }) => {
       return {
         ...workspaceMember,
         colorScheme: (workspaceMember.colorScheme as ColorScheme) ?? 'System',
         openRecordIn: toOpenRecordInPreference(workspaceMember.openRecordIn),
-        locale:
-          (workspaceMember.locale as keyof typeof APP_LOCALES) ?? SOURCE_LOCALE,
+        locale,
       };
     };
 
     if (isDefined(workspaceMember)) {
+      const preferredLocale = resolvePreferredLocale({
+        activeClientLocale: i18n.locale,
+        workspaceMemberLocale: workspaceMember.locale,
+      });
       const updatedWorkspaceMember =
-        affectDefaultValuesOnEmptyWorkspaceMemberFields(workspaceMember);
+        affectDefaultValuesOnEmptyWorkspaceMemberFields({
+          workspaceMember,
+          locale: preferredLocale,
+        });
       setCurrentWorkspaceMember(updatedWorkspaceMember);
 
-      updateLocaleCatalog(updatedWorkspaceMember.locale);
+      updateLocaleCatalog(preferredLocale);
 
       initializeFormatPreferences(updatedWorkspaceMember);
 
-      dynamicActivate(
-        (workspaceMember.locale as keyof typeof APP_LOCALES) ?? SOURCE_LOCALE,
-      );
+      void dynamicActivate(preferredLocale);
+
+      try {
+        localStorage.setItem('locale', preferredLocale);
+      } catch (error) {
+        logError(error);
+      }
+
+      if (workspaceMember.locale !== preferredLocale) {
+        void updateWorkspaceMemberSettings({
+          workspaceMemberId: workspaceMember.id,
+          update: { locale: preferredLocale },
+        })
+          .then(invalidateMetadataStore)
+          .catch(logError);
+      }
     }
 
     if (isDefined(workspaceMembers)) {
@@ -179,6 +209,8 @@ export const UserMetadataProviderInitialEffect = () => {
     setCurrentWorkspaceDeletedMembers,
     updateLocaleCatalog,
     setIsCurrentUserLoaded,
+    updateWorkspaceMemberSettings,
+    invalidateMetadataStore,
   ]);
 
   return null;

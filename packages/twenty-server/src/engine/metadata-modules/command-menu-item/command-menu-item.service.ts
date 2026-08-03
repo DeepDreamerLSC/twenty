@@ -481,13 +481,16 @@ export class CommandMenuItemService {
       workspaceId,
     });
 
-    const isStandardApp = isDefined(objectMetadata)
+    const isStandardObjectMetadata = isDefined(objectMetadata)
       ? objectMetadata.applicationId === standardApplicationId
       : false;
 
+    const isStandardCommandMenuItem =
+      commandMenuItem.applicationId === standardApplicationId;
+
     // The loader returns undefined for the standard app, so the standard-app
     // short-circuit lives in the loader, not here.
-    const applicationCatalog = isDefined(objectMetadata)
+    const objectMetadataApplicationCatalog = isDefined(objectMetadata)
       ? await applicationTranslationCatalogLoader.load({
           applicationId: objectMetadata.applicationId,
           workspaceId,
@@ -495,14 +498,25 @@ export class CommandMenuItemService {
         })
       : undefined;
 
+    const commandMenuItemApplicationCatalog =
+      !isStandardCommandMenuItem && isDefined(commandMenuItem.applicationId)
+        ? await applicationTranslationCatalogLoader.load({
+            applicationId: commandMenuItem.applicationId,
+            workspaceId,
+            locale: locale ?? SOURCE_LOCALE,
+          })
+        : undefined;
+
     return interpolateNavigationCommandMenuItemField({
       commandMenuItem,
       fieldName,
       objectMetadata,
-      isStandardApp,
+      isStandardObjectMetadata,
+      isStandardCommandMenuItem,
       locale,
       i18nInstance: this.i18nService.getI18nInstance(locale ?? SOURCE_LOCALE),
-      applicationCatalog,
+      objectMetadataApplicationCatalog,
+      commandMenuItemApplicationCatalog,
     });
   }
 
