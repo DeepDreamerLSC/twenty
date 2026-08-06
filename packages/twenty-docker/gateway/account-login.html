@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>登录 · 客户管理系统</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/images/integrations/twenty-logo.svg"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        color: #172033;
+        background: #f4f6fb;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background:
+          radial-gradient(circle at 15% 15%, #dce8ff 0, transparent 34%),
+          radial-gradient(circle at 85% 80%, #e7ddff 0, transparent 36%),
+          #f4f6fb;
+      }
+
+      main {
+        width: min(100%, 420px);
+      }
+
+      .card {
+        padding: 36px;
+        border: 1px solid rgba(23, 32, 51, 0.08);
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: 0 24px 70px rgba(43, 54, 86, 0.14);
+        backdrop-filter: blur(16px);
+      }
+
+      .brand {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 24px;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(23, 32, 51, 0.16);
+      }
+
+      .brand img {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 28px;
+        letter-spacing: -0.035em;
+      }
+
+      .subtitle {
+        margin: 10px 0 28px;
+        color: #677085;
+        line-height: 1.6;
+      }
+
+      .mode-switch {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+        padding: 4px;
+        border-radius: 12px;
+        background: #f0f2f7;
+      }
+
+      .mode-switch button {
+        width: 100%;
+        height: 38px;
+        margin: 0;
+        border: 0;
+        border-radius: 9px;
+        color: #6b7280;
+        background: transparent;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .mode-switch button:hover {
+        color: #4338ca;
+        background: #e7e8f1;
+      }
+
+      .mode-switch button[aria-selected='true'] {
+        color: #312e81;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(43, 54, 86, 0.1);
+      }
+
+      label {
+        display: block;
+        margin: 18px 0 8px;
+        font-size: 14px;
+        font-weight: 650;
+      }
+
+      input {
+        width: 100%;
+        height: 48px;
+        padding: 0 14px;
+        border: 1px solid #d9deea;
+        border-radius: 11px;
+        outline: none;
+        background: #fff;
+        color: #172033;
+        font-size: 16px;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      }
+
+      input:focus {
+        border-color: #635bff;
+        box-shadow: 0 0 0 4px rgba(99, 91, 255, 0.13);
+      }
+
+      .primary-button,
+      .continue-link {
+        width: 100%;
+        height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 24px;
+        border: 0;
+        border-radius: 11px;
+        color: #fff;
+        background: #5046e5;
+        font: inherit;
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .primary-button:hover,
+      .continue-link:hover {
+        background: #4338ca;
+      }
+
+      .primary-button:disabled {
+        cursor: wait;
+        opacity: 0.65;
+      }
+
+      .hint,
+      .remembered {
+        margin: 16px 0 0;
+        color: #778096;
+        font-size: 13px;
+        line-height: 1.55;
+        text-align: center;
+      }
+
+      .message {
+        min-height: 22px;
+        margin: 12px 0 0;
+        color: #c2413a;
+        font-size: 13px;
+        text-align: center;
+      }
+
+      .message.success {
+        color: #15803d;
+      }
+
+      .secondary-actions {
+        margin: 4px 0 0;
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .secondary-actions a {
+        color: #5046e5;
+        font-weight: 650;
+        text-decoration: none;
+      }
+
+      .secondary-actions a:hover {
+        text-decoration: underline;
+      }
+
+      .auth-note {
+        margin: 4px 0 0;
+        color: #778096;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .remembered {
+        margin-top: 24px;
+        padding-top: 22px;
+        border-top: 1px solid #e8ebf2;
+      }
+
+      .remembered .continue-link {
+        height: 42px;
+        margin-top: 12px;
+        color: #4338ca;
+        background: #eeecff;
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 14px;
+        }
+
+        .card {
+          padding: 28px 22px;
+          border-radius: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="card" aria-labelledby="auth-title">
+        <div class="brand" aria-hidden="true">
+          <img src="/images/integrations/twenty-logo.svg" alt="" />
+        </div>
+        <h1 id="auth-title">登录客户管理系统</h1>
+        <p id="auth-subtitle" class="subtitle">请输入账号和密码，进入客户管理系统。</p>
+
+        <div class="mode-switch" role="tablist" aria-label="登录或注册">
+          <button id="login-tab" type="button" role="tab" aria-selected="true">
+            登录
+          </button>
+          <button id="register-tab" type="button" role="tab" aria-selected="false">
+            注册新账号
+          </button>
+        </div>
+
+        <form id="auth-form" novalidate>
+          <label for="account">账号</label>
+          <input
+            id="account"
+            name="account"
+            type="text"
+            autocomplete="username"
+            autocapitalize="none"
+            spellcheck="false"
+            placeholder="请输入账号"
+            required
+            autofocus
+          />
+
+          <p id="account-note" class="auth-note" hidden>
+            账号支持 1–32 位中文、英文、数字，以及 . _ - ·。
+          </p>
+
+          <label for="password">密码</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            placeholder="请输入密码"
+            required
+          />
+
+          <p id="password-note" class="auth-note" hidden>
+            注册密码须为 8–50 位字符。
+          </p>
+
+          <div id="confirm-password-field" hidden>
+            <label for="confirm-password">确认密码</label>
+            <input
+              id="confirm-password"
+              name="confirm-password"
+              type="password"
+              autocomplete="new-password"
+              placeholder="请再次输入密码"
+            />
+          </div>
+
+          <button id="submit-button" class="primary-button" type="submit">登录</button>
+          <p id="mode-hint" class="hint">首次登录成功后，本设备 30 天内可免密进入。</p>
+          <p id="message" class="message" role="alert" aria-live="polite"></p>
+          <p class="secondary-actions">
+            <a href="/change-password">修改密码</a>
+            <span aria-hidden="true"> · </span>
+            <a href="/guide">使用指南</a>
+          </p>
+        </form>
+
+        <div id="remembered-session" class="remembered" hidden>
+          当前设备已有有效登录记录。
+          <a class="continue-link" href="/objects/people">免密进入客户管理系统</a>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const INTERNAL_ACCOUNT_DOMAIN = 'local.test';
+      const UNICODE_ACCOUNT_PREFIX = 'u-';
+      const ACCOUNT_NAME_PATTERN =
+        /^[\p{Script=Han}a-z0-9][\p{Script=Han}a-z0-9._·-]{0,31}$/u;
+      const LEGACY_ASCII_ACCOUNT_PATTERN = /^[a-z0-9][a-z0-9._-]{0,31}$/;
+      const DEFAULT_LOCALE = 'zh-CN';
+      const WORKSPACE_INVITE_HASH = '6c5cfa67-7828-457e-843c-24048871f0cc';
+      const TOKEN_PAIR_STORAGE_KEY = 'tokenPairState';
+      const APP_HOME_PATH = '/objects/people';
+      const form = document.querySelector('#auth-form');
+      const authTitle = document.querySelector('#auth-title');
+      const authSubtitle = document.querySelector('#auth-subtitle');
+      const loginTab = document.querySelector('#login-tab');
+      const registerTab = document.querySelector('#register-tab');
+      const accountInput = document.querySelector('#account');
+      const accountNote = document.querySelector('#account-note');
+      const passwordInput = document.querySelector('#password');
+      const passwordNote = document.querySelector('#password-note');
+      const confirmPasswordField = document.querySelector(
+        '#confirm-password-field',
+      );
+      const confirmPasswordInput = document.querySelector('#confirm-password');
+      const submitButton = document.querySelector('#submit-button');
+      const modeHint = document.querySelector('#mode-hint');
+      const message = document.querySelector('#message');
+      const rememberedSession = document.querySelector('#remembered-session');
+      let authMode = 'login';
+
+      const normalizeAccount = (account) =>
+        account.trim().normalize('NFC').toLowerCase();
+
+      const createUnicodeAccountHash = async (account) => {
+        const digest = await crypto.subtle.digest(
+          'SHA-256',
+          new TextEncoder().encode(account),
+        );
+
+        return btoa(
+          String.fromCharCode(...new Uint8Array(digest)),
+        )
+          .replaceAll('+', '-')
+          .replaceAll('/', '_')
+          .replace(/=+$/, '')
+          .toLowerCase();
+      };
+
+      const toInternalIdentity = async (account) => {
+        const normalized = normalizeAccount(account);
+
+        if (!normalized) {
+          throw new Error('请输入账号');
+        }
+
+        if (normalized.includes('@')) {
+          return normalized;
+        }
+
+        if (!ACCOUNT_NAME_PATTERN.test(normalized)) {
+          throw new Error('账号须为 1–32 位中文、英文或数字，可使用 . _ - ·');
+        }
+
+        if (LEGACY_ASCII_ACCOUNT_PATTERN.test(normalized)) {
+          return `${normalized}@${INTERNAL_ACCOUNT_DOMAIN}`;
+        }
+
+        const accountHash = await createUnicodeAccountHash(normalized);
+
+        return `${UNICODE_ACCOUNT_PREFIX}${accountHash}@${INTERNAL_ACCOUNT_DOMAIN}`;
+      };
+
+      class GraphqlRequestError extends Error {
+        constructor(errors) {
+          super('GraphQL request failed');
+          this.errors = errors;
+        }
+      }
+
+      const requestGraphql = async (query, variables, accessToken) => {
+        const headers = { 'Content-Type': 'application/json' };
+
+        if (accessToken) {
+          headers.Authorization = `Bearer ${accessToken}`;
+        }
+
+        const response = await fetch('/metadata', {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({ query, variables }),
+        });
+
+        if (!response.ok) {
+          throw new Error('服务暂时不可用，请稍后重试');
+        }
+
+        const payload = await response.json();
+
+        if (payload.errors?.length) {
+          throw new GraphqlRequestError(payload.errors);
+        }
+
+        return payload.data;
+      };
+
+      const getGraphqlErrorText = (error) =>
+        error instanceof GraphqlRequestError
+          ? error.errors
+              .map(
+                (item) =>
+                  `${item.message ?? ''} ${item.extensions?.code ?? ''} ${
+                    item.extensions?.userFriendlyMessage ?? ''
+                  }`,
+              )
+              .join(' ')
+              .toLowerCase()
+          : '';
+
+      const getAuthErrorMessage = (error) => {
+        if (!(error instanceof GraphqlRequestError)) {
+          return error instanceof Error ? error.message : '操作失败，请稍后重试';
+        }
+
+        if (authMode === 'login') {
+          return '账号或密码错误';
+        }
+
+        const details = getGraphqlErrorText(error);
+
+        if (
+          details.includes('already') ||
+          details.includes('email_already_used') ||
+          details.includes('duplicate')
+        ) {
+          return '该账号已存在，请直接登录';
+        }
+
+        if (details.includes('password') && details.includes('weak')) {
+          return '密码强度不足，请使用 8–50 位字符';
+        }
+
+        if (
+          details.includes('public invite link is disabled') ||
+          details.includes('does not have access') ||
+          details.includes('forbidden')
+        ) {
+          return '当前工作区暂未开放注册';
+        }
+
+        return '注册失败，请检查账号后重试';
+      };
+
+      const chooseWorkspace = (workspaces) => {
+        const matchingWorkspace = workspaces.find((workspace) =>
+          Object.values(workspace.workspaceUrls ?? {}).some((workspaceUrl) => {
+            if (!workspaceUrl) return false;
+
+            try {
+              return new URL(workspaceUrl).origin === window.location.origin;
+            } catch {
+              return false;
+            }
+          }),
+        );
+
+        return matchingWorkspace ?? workspaces[0];
+      };
+
+      const createWorkspaceSession = async (loginToken) => {
+        const tokenData = await requestGraphql(
+          `mutation AccountWorkspaceSession($loginToken: String!, $origin: String!) {
+            getAuthTokensFromLoginToken(loginToken: $loginToken, origin: $origin) {
+              tokens {
+                accessOrWorkspaceAgnosticToken { token expiresAt }
+                refreshToken { token expiresAt }
+              }
+            }
+          }`,
+          { loginToken, origin: window.location.origin },
+        );
+        const tokenPair = tokenData?.getAuthTokensFromLoginToken?.tokens;
+
+        if (!tokenPair?.accessOrWorkspaceAgnosticToken?.token) {
+          throw new Error('登录会话创建失败');
+        }
+
+        localStorage.setItem(TOKEN_PAIR_STORAGE_KEY, JSON.stringify(tokenPair));
+        localStorage.setItem('locale', DEFAULT_LOCALE);
+
+        return tokenPair;
+      };
+
+      const applyChinesePreferences = async (tokenPair, account, isNewAccount) => {
+        const accessToken = tokenPair.accessOrWorkspaceAgnosticToken.token;
+
+        try {
+          const currentUserData = await requestGraphql(
+            `query AccountProfileForChineseLocale {
+              currentUser {
+                onboardingStatus
+                workspaceMember {
+                  id
+                  locale
+                  name { firstName lastName }
+                }
+              }
+            }`,
+            {},
+            accessToken,
+          );
+          const workspaceMember = currentUserData?.currentUser?.workspaceMember;
+
+          if (workspaceMember?.id) {
+            const update = { locale: DEFAULT_LOCALE };
+
+            if (isNewAccount) {
+              update.name = {
+                firstName: normalizeAccount(account),
+                lastName: '',
+              };
+            }
+
+            await requestGraphql(
+              `mutation SetChineseWorkspaceMember($input: UpdateWorkspaceMemberSettingsInput!) {
+                updateWorkspaceMemberSettings(input: $input)
+              }`,
+              {
+                input: {
+                  workspaceMemberId: workspaceMember.id,
+                  update,
+                },
+              },
+              accessToken,
+            );
+          }
+
+          if (isNewAccount) {
+            await requestGraphql(
+              `mutation CompleteAccountRegistration {
+                skipSyncEmailOnboardingStep { success }
+              }`,
+              {},
+              accessToken,
+            );
+          }
+        } catch (error) {
+          console.warn('账号中文偏好初始化失败', error);
+        }
+      };
+
+      const signIn = async (account, password) => {
+        const email = await toInternalIdentity(account);
+        const signInData = await requestGraphql(
+          `mutation AccountSignIn($email: String!, $password: String!) {
+            signIn(email: $email, password: $password) {
+              availableWorkspaces {
+                availableWorkspacesForSignIn {
+                  id
+                  displayName
+                  loginToken
+                  workspaceUrls { subdomainUrl customUrl }
+                }
+              }
+            }
+          }`,
+          { email, password },
+        );
+
+        const workspaces =
+          signInData?.signIn?.availableWorkspaces?.availableWorkspacesForSignIn ??
+          [];
+        const workspace = chooseWorkspace(workspaces);
+
+        if (!workspace?.loginToken) {
+          throw new Error('当前账号没有可登录的工作区');
+        }
+
+        await createWorkspaceSession(workspace.loginToken);
+      };
+
+      const register = async (account, password) => {
+        const email = await toInternalIdentity(account);
+        const signUpData = await requestGraphql(
+          `mutation AccountSignUp(
+            $email: String!
+            $password: String!
+            $workspaceInviteHash: String!
+            $locale: String!
+          ) {
+            signUpInWorkspace(
+              email: $email
+              password: $password
+              workspaceInviteHash: $workspaceInviteHash
+              locale: $locale
+            ) {
+              loginToken { token expiresAt }
+              workspace { id }
+            }
+          }`,
+          {
+            email,
+            password,
+            workspaceInviteHash: WORKSPACE_INVITE_HASH,
+            locale: DEFAULT_LOCALE,
+          },
+        );
+        const loginToken = signUpData?.signUpInWorkspace?.loginToken?.token;
+
+        if (!loginToken) {
+          throw new Error('注册成功，但登录会话创建失败');
+        }
+
+        const tokenPair = await createWorkspaceSession(loginToken);
+        await applyChinesePreferences(tokenPair, account, true);
+      };
+
+      const hasRememberedSession = () => {
+        try {
+          const tokenPair = JSON.parse(
+            localStorage.getItem(TOKEN_PAIR_STORAGE_KEY) ?? 'null',
+          );
+          const refreshExpiresAt = tokenPair?.refreshToken?.expiresAt;
+
+          return (
+            Boolean(tokenPair?.accessOrWorkspaceAgnosticToken?.token) &&
+            (!refreshExpiresAt || new Date(refreshExpiresAt).getTime() > Date.now())
+          );
+        } catch {
+          return false;
+        }
+      };
+
+      const hasExistingSession = hasRememberedSession();
+
+      const setAuthMode = (mode) => {
+        authMode = mode;
+        const isRegistering = mode === 'register';
+
+        document.title = `${isRegistering ? '注册' : '登录'} · 客户管理系统`;
+        authTitle.textContent = isRegistering
+          ? '注册客户管理系统账号'
+          : '登录客户管理系统';
+        authSubtitle.textContent = isRegistering
+          ? '创建账号后即可加入客户管理系统。'
+          : '请输入账号和密码，进入客户管理系统。';
+        loginTab.setAttribute('aria-selected', String(!isRegistering));
+        registerTab.setAttribute('aria-selected', String(isRegistering));
+        confirmPasswordField.hidden = !isRegistering;
+        confirmPasswordInput.required = isRegistering;
+        accountNote.hidden = !isRegistering;
+        passwordInput.autocomplete = isRegistering
+          ? 'new-password'
+          : 'current-password';
+        passwordNote.hidden = !isRegistering;
+        submitButton.textContent = isRegistering
+          ? '注册并进入客户管理系统'
+          : '登录';
+        modeHint.textContent = isRegistering
+          ? '新账号默认使用中文，并以普通成员身份加入工作区。'
+          : '首次登录成功后，本设备 30 天内可免密进入。';
+        rememberedSession.hidden = isRegistering || !hasExistingSession;
+        message.textContent = '';
+        message.classList.remove('success');
+        passwordInput.value = '';
+        confirmPasswordInput.value = '';
+      };
+
+      loginTab.addEventListener('click', () => setAuthMode('login'));
+      registerTab.addEventListener('click', () => setAuthMode('register'));
+
+      const initialMode =
+        window.location.pathname === '/register' ||
+        new URLSearchParams(window.location.search).get('mode') === 'register'
+          ? 'register'
+          : 'login';
+
+      setAuthMode(initialMode);
+
+      if (
+        new URLSearchParams(window.location.search).get('passwordChanged') === '1'
+      ) {
+        message.textContent = '密码已修改，请使用新密码登录。';
+        message.classList.add('success');
+      }
+
+      const isSwitchAccountRequested =
+        new URLSearchParams(window.location.search).get('switch') === '1';
+
+      if (
+        hasExistingSession &&
+        initialMode === 'login' &&
+        !isSwitchAccountRequested
+      ) {
+        window.location.replace(APP_HOME_PATH);
+      }
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        message.textContent = '';
+        message.classList.remove('success');
+        submitButton.disabled = true;
+        submitButton.textContent =
+          authMode === 'register' ? '正在注册…' : '正在登录…';
+
+        try {
+          if (!passwordInput.value) {
+            throw new Error('请输入密码');
+          }
+
+          if (authMode === 'register') {
+            if (passwordInput.value.length < 8 || passwordInput.value.length > 50) {
+              throw new Error('注册密码须为 8–50 位字符');
+            }
+
+            if (passwordInput.value !== confirmPasswordInput.value) {
+              throw new Error('两次输入的密码不一致');
+            }
+
+            await register(accountInput.value, passwordInput.value);
+          } else {
+            await signIn(accountInput.value, passwordInput.value);
+          }
+
+          window.location.replace(APP_HOME_PATH);
+        } catch (error) {
+          message.textContent = getAuthErrorMessage(error);
+          passwordInput.select();
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent =
+            authMode === 'register' ? '注册并进入客户管理系统' : '登录';
+        }
+      });
+    </script>
+  </body>
+</html>

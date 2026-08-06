@@ -1,0 +1,170 @@
+import { type MessageDescriptor } from '@lingui/core';
+import { msg } from '@lingui/core/macro';
+
+const objectMetadataItemLabelSingular =
+  '${capitalize(objectMetadataItem.labelSingular)}';
+const objectMetadataItemLabelPlural =
+  '${capitalize(objectMetadataItem.labelPlural)}';
+const objectMetadataLabel = '${capitalize(objectMetadataLabel)}';
+const navigateToObjectMetadataItemLabelPlural =
+  '${navigateToObjectMetadataItem.labelPlural}';
+
+const STANDARD_COMMAND_MENU_ITEM_MESSAGE_ENTRIES: Array<
+  [source: string, descriptor: MessageDescriptor]
+> = [
+  ['AI', msg`AI`],
+  ['Accounts', msg`Accounts`],
+  ['Activate', msg`Activate`],
+  ['Activate Workflow', msg`Activate Workflow`],
+  ['Add a Node', msg`Add a Node`],
+  ['Add to Favorites', msg`Add to Favorites`],
+  ['Admin Panel', msg`Admin Panel`],
+  ['Apps', msg`Apps`],
+  ['Ask AI', msg`Ask AI`],
+  ['Billing', msg`Billing`],
+  ['Calendars', msg`Calendars`],
+  ['Campaign', msg`Campaign`],
+  ['Cancel', msg`Cancel`],
+  ['Cancel Edition', msg`Cancel Edition`],
+  ['Community', msg`Community`],
+  ['Compose', msg`Compose`],
+  ['Compose Campaign', msg`Compose Campaign`],
+  ['Compose Email', msg`Compose Email`],
+  ['Create View', msg`Create View`],
+  [
+    'Create new ${capitalize(objectMetadataItem.labelSingular)}',
+    msg`Create new ${objectMetadataItemLabelSingular}`,
+  ],
+  ['Create new Campaign', msg`Create new Campaign`],
+  ['Data Model', msg`Data Model`],
+  ['Deactivate', msg`Deactivate`],
+  ['Deactivate Workflow', msg`Deactivate Workflow`],
+  ['Delete', msg`Delete`],
+  [
+    'Delete ${capitalize(objectMetadataLabel)}',
+    msg`Delete ${objectMetadataLabel}`,
+  ],
+  [
+    'Deleted ${capitalize(objectMetadataItem.labelPlural)}',
+    msg`Deleted ${objectMetadataItemLabelPlural}`,
+  ],
+  ['Destroy', msg`Destroy`],
+  ['Discard Draft', msg`Discard Draft`],
+  ['Domains', msg`Domains`],
+  ['Duplicate', msg`Duplicate`],
+  ['Duplicate Dashboard', msg`Duplicate Dashboard`],
+  ['Duplicate Workflow', msg`Duplicate Workflow`],
+  ['Edit', msg`Edit`],
+  ['Edit Dashboard', msg`Edit Dashboard`],
+  ['Edit Layout', msg`Edit Layout`],
+  ['Emails', msg`Emails`],
+  ['Experience', msg`Experience`],
+  ['Export', msg`Export`],
+  [
+    'Export ${capitalize(objectMetadataLabel)}',
+    msg`Export ${objectMetadataLabel}`,
+  ],
+  ['Export View', msg`Export View`],
+  ['Export to PDF', msg`Export to PDF`],
+  ['General', msg`General`],
+  ['Go to AI Settings', msg`Go to AI Settings`],
+  ['Go to Accounts Settings', msg`Go to Accounts Settings`],
+  ['Go to Admin Panel Settings', msg`Go to Admin Panel Settings`],
+  ['Go to Apps Settings', msg`Go to Apps Settings`],
+  ['Go to Billing Settings', msg`Go to Billing Settings`],
+  ['Go to Calendars Settings', msg`Go to Calendars Settings`],
+  ['Go to Community Settings', msg`Go to Community Settings`],
+  ['Go to Data Model Settings', msg`Go to Data Model Settings`],
+  ['Go to Domains Settings', msg`Go to Domains Settings`],
+  ['Go to Emails Settings', msg`Go to Emails Settings`],
+  ['Go to Experience Settings', msg`Go to Experience Settings`],
+  ['Go to General Settings', msg`Go to General Settings`],
+  ['Go to MCP & APIs Settings', msg`Go to MCP & APIs Settings`],
+  ['Go to Members Settings', msg`Go to Members Settings`],
+  ['Go to Roles Settings', msg`Go to Roles Settings`],
+  ['Go to Security Settings', msg`Go to Security Settings`],
+  ['Go to Settings', msg`Go to Settings`],
+  [
+    'Go to ${navigateToObjectMetadataItem.labelPlural}',
+    msg`Go to ${navigateToObjectMetadataItemLabelPlural}`,
+  ],
+  ['Hide deleted', msg`Hide deleted`],
+  [
+    'Hide deleted ${capitalize(objectMetadataItem.labelPlural)}',
+    msg`Hide deleted ${objectMetadataItemLabelPlural}`,
+  ],
+  ['Import', msg`Import`],
+  [
+    'Import ${capitalize(objectMetadataItem.labelPlural)}',
+    msg`Import ${objectMetadataItemLabelPlural}`,
+  ],
+  ['MCP & APIs', msg`MCP & APIs`],
+  ['Members', msg`Members`],
+  ['Merge', msg`Merge`],
+  [
+    'Merge ${capitalize(objectMetadataItem.labelPlural)}',
+    msg`Merge ${objectMetadataItemLabelPlural}`,
+  ],
+  [
+    'Navigate to next ${capitalize(objectMetadataItem.labelSingular)}',
+    msg`Navigate to next ${objectMetadataItemLabelSingular}`,
+  ],
+  [
+    'Navigate to previous ${capitalize(objectMetadataItem.labelSingular)}',
+    msg`Navigate to previous ${objectMetadataItemLabelSingular}`,
+  ],
+  [
+    'New ${capitalize(objectMetadataItem.labelSingular)}',
+    msg`New ${objectMetadataItemLabelSingular}`,
+  ],
+  ['New Campaign', msg`New Campaign`],
+  [
+    'Permanently destroy ${capitalize(objectMetadataLabel)}',
+    msg`Permanently destroy ${objectMetadataLabel}`,
+  ],
+  ['Previous AI Chats', msg`Previous AI Chats`],
+  ['Remove from Favorites', msg`Remove from Favorites`],
+  ['Reply', msg`Reply`],
+  ['Restore', msg`Restore`],
+  [
+    'Restore ${capitalize(objectMetadataLabel)}',
+    msg`Restore ${objectMetadataLabel}`,
+  ],
+  ['Retry', msg`Retry`],
+  ['Roles', msg`Roles`],
+  ['Save', msg`Save`],
+  ['Save Dashboard', msg`Save Dashboard`],
+  ['Search', msg`Search`],
+  ['Security', msg`Security`],
+  ['See Active Version', msg`See Active Version`],
+  ['See Runs', msg`See Runs`],
+  ['See Version', msg`See Version`],
+  ['See Versions', msg`See Versions`],
+  ['See Versions History', msg`See Versions History`],
+  ['See Workflow', msg`See Workflow`],
+  [
+    'See deleted ${capitalize(objectMetadataItem.labelPlural)}',
+    msg`See deleted ${objectMetadataItemLabelPlural}`,
+  ],
+  ['Send', msg`Send`],
+  ['Send Campaign', msg`Send Campaign`],
+  ['Send Email', msg`Send Email`],
+  ['Send Test Email', msg`Send Test Email`],
+  ['Settings', msg`Settings`],
+  ['Stop', msg`Stop`],
+  ['Test', msg`Test`],
+  ['Test Workflow', msg`Test Workflow`],
+  ['Tidy up', msg`Tidy up`],
+  ['Tidy up Workflow', msg`Tidy up Workflow`],
+  ['Update', msg`Update`],
+  [
+    'Update ${capitalize(objectMetadataItem.labelPlural)}',
+    msg`Update ${objectMetadataItemLabelPlural}`,
+  ],
+  ['Use as Draft', msg`Use as Draft`],
+  ['View Previous AI Chats', msg`View Previous AI Chats`],
+];
+
+export const STANDARD_COMMAND_MENU_ITEM_MESSAGE_BY_SOURCE = new Map(
+  STANDARD_COMMAND_MENU_ITEM_MESSAGE_ENTRIES,
+);

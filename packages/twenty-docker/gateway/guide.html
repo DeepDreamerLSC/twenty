@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>使用指南 · 客户管理系统</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/images/integrations/twenty-logo.svg"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+        color: #172033;
+        background: #f5f7fb;
+        scroll-behavior: smooth;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        background:
+          radial-gradient(circle at 8% 4%, #dce8ff 0, transparent 24rem),
+          radial-gradient(circle at 92% 22%, #ebe3ff 0, transparent 24rem),
+          #f5f7fb;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 68px;
+        padding: 10px 28px;
+        border-bottom: 1px solid rgba(23, 32, 51, 0.08);
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(18px);
+      }
+
+      .brand-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 15px;
+        font-weight: 750;
+        text-decoration: none;
+      }
+
+      .brand-link img {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        box-shadow: 0 6px 16px rgba(23, 32, 51, 0.14);
+      }
+
+      .top-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .button-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        padding: 0 15px;
+        border: 1px solid #d9deea;
+        border-radius: 10px;
+        background: #fff;
+        color: #344054;
+        font-size: 14px;
+        font-weight: 680;
+        text-decoration: none;
+      }
+
+      .button-link.primary {
+        border-color: #5046e5;
+        background: #5046e5;
+        color: #fff;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 220px minmax(0, 820px);
+        justify-content: center;
+        gap: 34px;
+        padding: 42px 28px 80px;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 94px;
+        align-self: start;
+        padding: 20px;
+        border: 1px solid rgba(23, 32, 51, 0.08);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.82);
+      }
+
+      .sidebar-title {
+        margin: 0 0 12px;
+        color: #778096;
+        font-size: 12px;
+        font-weight: 760;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .sidebar nav {
+        display: grid;
+        gap: 4px;
+      }
+
+      .sidebar a {
+        padding: 9px 10px;
+        border-radius: 8px;
+        color: #4c556a;
+        font-size: 14px;
+        text-decoration: none;
+      }
+
+      .sidebar a:hover {
+        background: #f0f2ff;
+        color: #4338ca;
+      }
+
+      main {
+        min-width: 0;
+      }
+
+      .hero {
+        padding: 42px;
+        overflow: hidden;
+        border: 1px solid rgba(23, 32, 51, 0.08);
+        border-radius: 24px;
+        background:
+          linear-gradient(135deg, rgba(80, 70, 229, 0.96), rgba(99, 91, 255, 0.88)),
+          #5046e5;
+        color: #fff;
+        box-shadow: 0 24px 60px rgba(67, 56, 202, 0.18);
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        font-size: 13px;
+        font-weight: 760;
+        letter-spacing: 0.08em;
+        opacity: 0.78;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 620px;
+        margin: 0;
+        font-size: clamp(32px, 6vw, 48px);
+        line-height: 1.12;
+        letter-spacing: -0.045em;
+      }
+
+      .hero-description {
+        max-width: 620px;
+        margin: 18px 0 0;
+        font-size: 17px;
+        line-height: 1.75;
+        opacity: 0.88;
+      }
+
+      .quick-links {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 24px;
+      }
+
+      .quick-link {
+        display: block;
+        padding: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.11);
+        text-decoration: none;
+      }
+
+      .quick-link strong,
+      .quick-link span {
+        display: block;
+      }
+
+      .quick-link span {
+        margin-top: 6px;
+        font-size: 13px;
+        opacity: 0.76;
+      }
+
+      .section {
+        margin-top: 26px;
+        padding: 34px 38px;
+        border: 1px solid rgba(23, 32, 51, 0.08);
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 12px 36px rgba(43, 54, 86, 0.06);
+        scroll-margin-top: 92px;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: 25px;
+        letter-spacing: -0.025em;
+      }
+
+      h3 {
+        margin: 26px 0 8px;
+        font-size: 17px;
+      }
+
+      p,
+      li {
+        color: #515a70;
+        line-height: 1.75;
+      }
+
+      ol,
+      ul {
+        padding-left: 22px;
+      }
+
+      li + li {
+        margin-top: 7px;
+      }
+
+      code {
+        padding: 2px 6px;
+        border-radius: 6px;
+        background: #f0f2f7;
+        color: #4338ca;
+        font-family: inherit;
+        font-size: 0.92em;
+        font-weight: 680;
+      }
+
+      .callout {
+        margin-top: 20px;
+        padding: 17px 19px;
+        border-left: 4px solid #f59e0b;
+        border-radius: 10px;
+        background: #fff8e8;
+      }
+
+      .callout strong {
+        display: block;
+        margin-bottom: 4px;
+        color: #8a4b08;
+      }
+
+      .callout p {
+        margin: 0;
+        color: #7b571f;
+      }
+
+      .feature-grid,
+      .role-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 20px;
+      }
+
+      .feature-card,
+      .role-card {
+        padding: 18px;
+        border: 1px solid #e4e7ef;
+        border-radius: 13px;
+        background: #fafbfe;
+      }
+
+      .feature-card strong,
+      .role-card strong {
+        display: block;
+        margin-bottom: 7px;
+      }
+
+      .feature-card p,
+      .role-card p {
+        margin: 0;
+        font-size: 14px;
+      }
+
+      .checklist {
+        padding: 0;
+        list-style: none;
+        counter-reset: checklist;
+      }
+
+      .checklist li {
+        position: relative;
+        min-height: 42px;
+        padding: 8px 0 8px 48px;
+        counter-increment: checklist;
+      }
+
+      .checklist li::before {
+        position: absolute;
+        top: 5px;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background: #eeecff;
+        color: #5046e5;
+        content: counter(checklist);
+        font-weight: 780;
+      }
+
+      .footer {
+        padding: 0 24px 42px;
+        color: #778096;
+        font-size: 13px;
+        text-align: center;
+      }
+
+      @media (max-width: 900px) {
+        .layout {
+          grid-template-columns: minmax(0, 760px);
+          padding-top: 26px;
+        }
+
+        .sidebar {
+          position: static;
+          padding: 12px;
+          overflow-x: auto;
+        }
+
+        .sidebar-title {
+          display: none;
+        }
+
+        .sidebar nav {
+          display: flex;
+          width: max-content;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .topbar {
+          padding: 10px 14px;
+        }
+
+        .brand-link span,
+        .top-actions .secondary {
+          display: none;
+        }
+
+        .layout {
+          gap: 18px;
+          padding: 18px 14px 56px;
+        }
+
+        .hero,
+        .section {
+          padding: 26px 22px;
+          border-radius: 17px;
+        }
+
+        .quick-links,
+        .feature-grid,
+        .role-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand-link" href="/objects/people">
+        <img src="/images/integrations/twenty-logo.svg" alt="Twenty" />
+        <span>客户管理系统</span>
+      </a>
+      <div class="top-actions">
+        <a class="button-link secondary" href="/change-password">修改密码</a>
+        <a class="button-link primary" href="/objects/people">进入系统</a>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar" aria-label="指南目录">
+        <p class="sidebar-title">指南目录</p>
+        <nav>
+          <a href="#start">开始使用</a>
+          <a href="#accounts">账号与成员</a>
+          <a href="#roles">角色与权限</a>
+          <a href="#daily-work">日常工作</a>
+          <a href="#checklist">管理员清单</a>
+          <a href="#troubleshooting">常见问题</a>
+        </nav>
+      </aside>
+
+      <main>
+        <section id="start" class="hero">
+          <p class="eyebrow">Administrator Guide</p>
+          <h1>客户管理系统管理员使用指南</h1>
+          <p class="hero-description">
+            面向第一次接触系统的管理员，介绍账号管理、角色权限、客户资料维护和日常安全检查。
+          </p>
+          <div class="quick-links">
+            <a class="quick-link" href="/welcome?switch=1">
+              <strong>账号登录与注册</strong>
+              <span>切换账号或为新员工注册</span>
+            </a>
+            <a class="quick-link" href="/change-password">
+              <strong>修改密码</strong>
+              <span>验证当前密码后设置新密码</span>
+            </a>
+            <a class="quick-link" href="/settings/members">
+              <strong>成员管理</strong>
+              <span>查看成员和账号状态</span>
+            </a>
+            <a class="quick-link" href="/settings/members/roles">
+              <strong>角色与权限</strong>
+              <span>创建角色并分配员工权限</span>
+            </a>
+          </div>
+        </section>
+
+        <section id="accounts" class="section">
+          <h2>账号与成员管理</h2>
+          <h3>新员工如何注册</h3>
+          <ol>
+            <li>打开登录页，选择“注册”。</li>
+            <li>输入中文或英文账号，以及 8–50 位密码。</li>
+            <li>注册成功后，员工默认加入当前工作区。</li>
+            <li>管理员进入 <code>设置 → 成员</code> 核对账号，并分配合适角色。</li>
+          </ol>
+
+          <h3>登录与改密</h3>
+          <ul>
+            <li>系统使用账号和密码登录，不要求填写邮箱。</li>
+            <li>首次登录后，本设备可在一定期限内免密进入。</li>
+            <li>修改密码必须验证当前密码；修改成功后，历史免密会话会立即失效。</li>
+            <li>如果忘记当前密码，需要联系系统维护人员进行人工重置。</li>
+          </ul>
+        </section>
+
+        <section id="roles" class="section">
+          <h2>角色与权限</h2>
+          <p>
+            管理员可以在 <code>设置 → 成员 → 角色</code>
+            中创建角色、设置权限，并将员工分配到对应角色。
+          </p>
+
+          <div class="callout">
+            <strong>上线前必须检查默认 Member 角色</strong>
+            <p>
+              当前默认 Member 角色权限较大，能够查看、修改和删除全部 CRM 数据。正式开放员工注册前，建议先收紧权限或建立受限角色。
+            </p>
+          </div>
+
+          <div class="role-grid">
+            <div class="role-card">
+              <strong>Admin 管理员</strong>
+              <p>拥有全部设置和数据权限。系统内置角色，不建议分配给普通员工。</p>
+            </div>
+            <div class="role-card">
+              <strong>普通员工</strong>
+              <p>可维护客户、任务和备注，不允许修改系统设置或永久删除数据。</p>
+            </div>
+            <div class="role-card">
+              <strong>客服 / 顾问</strong>
+              <p>可查看和更新负责的客户资料，按实际工作需要开放字段。</p>
+            </div>
+            <div class="role-card">
+              <strong>只读人员</strong>
+              <p>只允许查询客户和业务数据，不允许新增、修改或删除。</p>
+            </div>
+          </div>
+
+          <h3>建议遵循最小权限原则</h3>
+          <ul>
+            <li>只有确实负责系统管理的人才使用 Admin。</li>
+            <li>普通员工默认关闭永久删除和系统设置权限。</li>
+            <li>员工离职时，及时移除或停用其成员账号。</li>
+            <li>角色变更后，让员工刷新页面或重新登录。</li>
+          </ul>
+        </section>
+
+        <section id="daily-work" class="section">
+          <h2>日常客户管理</h2>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <strong>人员</strong>
+              <p>记录具体客户或联系人，包括姓名、手机、微信、来源和备注。</p>
+            </div>
+            <div class="feature-card">
+              <strong>公司</strong>
+              <p>记录客户所属企业、机构或其他组织，并关联具体联系人。</p>
+            </div>
+            <div class="feature-card">
+              <strong>商机</strong>
+              <p>跟踪项目、成交机会、负责人、预计金额和当前阶段。</p>
+            </div>
+            <div class="feature-card">
+              <strong>任务</strong>
+              <p>安排回访、资料补充和后续跟进，设置负责人及截止时间。</p>
+            </div>
+            <div class="feature-card">
+              <strong>笔记与动态</strong>
+              <p>保存沟通内容、客户备注和操作轨迹，方便团队接续服务。</p>
+            </div>
+            <div class="feature-card">
+              <strong>列表与视图</strong>
+              <p>通过筛选、排序和保存视图，快速找到待跟进或重点客户。</p>
+            </div>
+          </div>
+
+          <h3>推荐的客户录入规范</h3>
+          <p>
+            至少录入客户姓名、手机号、微信号、客户来源、负责人、首次接触时间和备注。手机号等关键字段应统一格式，避免同一客户重复建档。
+          </p>
+        </section>
+
+        <section id="checklist" class="section">
+          <h2>管理员首次使用清单</h2>
+          <ol class="checklist">
+            <li>修改自己的初始密码，并避免多人共用管理员账号。</li>
+            <li>检查当前管理员名单，只保留确实需要管理权限的人员。</li>
+            <li>创建普通员工、客服和只读角色，关闭不必要的删除权限。</li>
+            <li>检查默认 Member 角色，确定新注册员工的默认访问范围。</li>
+            <li>先录入少量测试客户，确认字段和流程后再批量导入。</li>
+            <li>约定客户录入规范、负责人分配方式和定期回访流程。</li>
+            <li>定期检查成员、角色和异常登录情况，并做好数据库备份。</li>
+          </ol>
+        </section>
+
+        <section id="troubleshooting" class="section">
+          <h2>常见问题</h2>
+          <h3>角色已经修改，但员工看不到新权限</h3>
+          <p>请先刷新页面；如果仍未更新，让员工退出后重新登录。</p>
+
+          <h3>员工忘记密码</h3>
+          <p>
+            当前账号不依赖真实邮箱，无法通过邮件找回。请联系系统维护人员人工重置，重置后提醒员工立即修改密码。
+          </p>
+
+          <h3>找不到成员或角色入口</h3>
+          <p>
+            确认当前账号拥有 Admin 权限，然后进入 <code>设置 → 成员</code>；角色页面位于成员页面的“角色”标签。
+          </p>
+
+          <h3>页面无法打开</h3>
+          <p>
+            先刷新浏览器并检查网络。如果所有人都无法访问，应由系统维护人员检查 Cloudflare 隧道和 CRM 容器健康状态。
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <footer class="footer">
+      客户管理系统 · 管理员使用指南
+    </footer>
+  </body>
+</html>

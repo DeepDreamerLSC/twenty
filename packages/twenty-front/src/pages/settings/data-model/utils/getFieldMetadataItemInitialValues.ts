@@ -1,4 +1,8 @@
 import { type FieldMetadataItem } from '@/object-metadata/types/FieldMetadataItem';
+import {
+  getCurrencyFieldDisplayFormat,
+  type CurrencyFieldDisplaySettings,
+} from '@/object-record/record-field/ui/utils/getCurrencyFieldDisplayFormat';
 import { isNonEmptyString } from '@sniptt/guards';
 import { CurrencyCode } from 'twenty-shared/constants';
 import { FieldMetadataType } from '~/generated-metadata/graphql';
@@ -15,9 +19,13 @@ export const getFieldMetadataItemInitialValues = (
     };
   }
 
-  const settings = fieldMetadataItem.settings ?? {
-    format: 'short',
-    decimals: DEFAULT_DECIMAL_VALUE,
+  const rawSettings = fieldMetadataItem.settings as
+    | CurrencyFieldDisplaySettings
+    | null
+    | undefined;
+  const settings = {
+    format: getCurrencyFieldDisplayFormat(rawSettings),
+    decimals: rawSettings?.decimals ?? DEFAULT_DECIMAL_VALUE,
   };
 
   const currencyCode = isNonEmptyString(
