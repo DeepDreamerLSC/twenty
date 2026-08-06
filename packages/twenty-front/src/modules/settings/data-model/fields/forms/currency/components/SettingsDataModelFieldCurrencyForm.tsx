@@ -88,7 +88,7 @@ export const SettingsDataModelFieldCurrencyForm = ({
         control={control}
         defaultValue={initialSettingsValue}
         render={({ field: { onChange, value } }) => {
-          const format = value?.format ?? fieldMetadataCurrencyFormat[0];
+          const format = value?.format ?? fieldMetadataCurrencyFormat[1];
           const decimals = value?.decimals ?? DEFAULT_DECIMAL_VALUE;
 
           return (
