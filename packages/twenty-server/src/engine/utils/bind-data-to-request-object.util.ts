@@ -1,7 +1,7 @@
 import { type Request } from 'express';
-import { type APP_LOCALES, SOURCE_LOCALE } from 'twenty-shared/translations';
 
 import { type RawAuthContext } from 'src/engine/core-modules/auth/types/raw-auth-context.type';
+import { resolveRequestLocale } from 'src/engine/utils/resolve-request-locale.util';
 
 export const bindDataToRequestObject = (
   data: RawAuthContext,
@@ -22,8 +22,8 @@ export const bindDataToRequestObject = (
   request.impersonationContext = data.impersonationContext;
   request.tokenType = data.tokenType;
 
-  request.locale =
-    data.userWorkspace?.locale ??
-    (request.headers['x-locale'] as keyof typeof APP_LOCALES) ??
-    SOURCE_LOCALE;
+  request.locale = resolveRequestLocale({
+    headerLocale: request.headers['x-locale'],
+    userWorkspaceLocale: data.userWorkspace?.locale,
+  });
 };

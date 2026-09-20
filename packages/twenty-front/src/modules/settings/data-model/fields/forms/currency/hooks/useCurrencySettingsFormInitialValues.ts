@@ -22,7 +22,7 @@ export const useCurrencySettingsFormInitialValues = ({
 
   const initialFormValues: SettingsDataModelFieldCurrencyFormValues = {
     settings: settings ?? {
-      format: 'short',
+      format: 'full',
       decimals: DEFAULT_DECIMAL_VALUE,
     },
     defaultValue: defaultValue ?? {

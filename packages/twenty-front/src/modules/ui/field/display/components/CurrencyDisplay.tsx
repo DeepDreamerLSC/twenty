@@ -11,6 +11,7 @@ import {
   type FieldCurrencyMetadata,
   type FieldCurrencyValue,
 } from '@/object-record/record-field/ui/types/FieldMetadata';
+import { getCurrencyFieldDisplayFormat } from '@/object-record/record-field/ui/utils/getCurrencyFieldDisplayFormat';
 import { SETTINGS_FIELD_CURRENCY_CODES } from '@/settings/data-model/constants/SettingsFieldCurrencyCodes';
 import { EllipsisDisplay } from '@/ui/field/display/components/EllipsisDisplay';
 import { DEFAULT_DECIMAL_VALUE } from '~/utils/format/formatNumber';
@@ -44,7 +45,9 @@ export const CurrencyDisplay = ({
     ? null
     : currencyValue?.amountMicros / 1000000;
 
-  const format = fieldDefinition.metadata.settings?.format;
+  const displayFormat = getCurrencyFieldDisplayFormat(
+    fieldDefinition.metadata.settings,
+  );
   const decimals = fieldDefinition.metadata.settings?.decimals;
   const decimalsToUse = decimals ?? DEFAULT_DECIMAL_VALUE;
 
@@ -77,7 +80,7 @@ export const CurrencyDisplay = ({
           </>
         )}
         {amountToDisplay !== null
-          ? !isDefined(format) || format === 'short'
+          ? displayFormat === 'short'
             ? formatToShortNumber(amountToDisplay)
             : formatNumber(amountToDisplay, { decimals: decimalsToUse })
           : null}

@@ -9987,3 +9987,488 @@ msgstr "Your workspace has been updated with a new data model. Please refresh th
 #: src/engine/workspace-manager/workspace-cleaner/services/cleaner.workspace-service.ts
 msgid "Your workspace is paused — reactivate to keep your data"
 msgstr "Your workspace is paused — reactivate to keep your data"
+
+#. js-lingui-id: jsQZMk
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "AI"
+msgstr "AI"
+
+#. js-lingui-id: bPwFdf
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Accounts"
+msgstr "Accounts"
+
+#. js-lingui-id: FQBaXG
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Activate"
+msgstr "Activate"
+
+#. js-lingui-id: tu8A/k
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Activate Workflow"
+msgstr "Activate Workflow"
+
+#. js-lingui-id: 4z3e0b
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Add a Node"
+msgstr "Add a Node"
+
+#. js-lingui-id: NgFERn
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Add to Favorites"
+msgstr "Add to Favorites"
+
+#. js-lingui-id: g1in8j
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Admin Panel"
+msgstr "Admin Panel"
+
+#. js-lingui-id: VDvaN2
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Apps"
+msgstr "Apps"
+
+#. js-lingui-id: xWEvuo
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Ask AI"
+msgstr "Ask AI"
+
+#. js-lingui-id: R+w/Va
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Billing"
+msgstr "Billing"
+
+#. js-lingui-id: EUpfsd
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Calendars"
+msgstr "Calendars"
+
+#. js-lingui-id: dEgA5A
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Cancel"
+msgstr "Cancel"
+
+#. js-lingui-id: HYLdMN
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Cancel Edition"
+msgstr "Cancel Edition"
+
+#. js-lingui-id: chL5IG
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Community"
+msgstr "Community"
+
+#. js-lingui-id: QOhkyl
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Compose"
+msgstr "Compose"
+
+#. js-lingui-id: jjRhGA
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Compose Campaign"
+msgstr "Compose Campaign"
+
+#. js-lingui-id: avabab
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Compose Email"
+msgstr "Compose Email"
+
+#. js-lingui-id: 3D0MXY
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Create View"
+msgstr "Create View"
+
+#. js-lingui-id: S2DitS
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Create new {objectMetadataItemLabelSingular}"
+msgstr "Create new {objectMetadataItemLabelSingular}"
+
+#. js-lingui-id: x65syA
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Create new Campaign"
+msgstr "Create new Campaign"
+
+#. js-lingui-id: 4BuYDo
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Data Model"
+msgstr "Data Model"
+
+#. js-lingui-id: 5y3O+A
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Deactivate"
+msgstr "Deactivate"
+
+#. js-lingui-id: 4tpC8V
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Deactivate Workflow"
+msgstr "Deactivate Workflow"
+
+#. js-lingui-id: dUO4Db
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Delete {objectMetadataLabel}"
+msgstr "Delete {objectMetadataLabel}"
+
+#. js-lingui-id: Dtbwf8
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Deleted {objectMetadataItemLabelPlural}"
+msgstr "Deleted {objectMetadataItemLabelPlural}"
+
+#. js-lingui-id: 2xxBws
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Destroy"
+msgstr "Destroy"
+
+#. js-lingui-id: zAg2B9
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Discard Draft"
+msgstr "Discard Draft"
+
+#. js-lingui-id: AZ4xlc
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Domains"
+msgstr "Domains"
+
+#. js-lingui-id: euc6Ns
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Duplicate"
+msgstr "Duplicate"
+
+#. js-lingui-id: MR2sZ1
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Duplicate Dashboard"
+msgstr "Duplicate Dashboard"
+
+#. js-lingui-id: 2RpRNn
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Duplicate Workflow"
+msgstr "Duplicate Workflow"
+
+#. js-lingui-id: ePK91l
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Edit"
+msgstr "Edit"
+
+#. js-lingui-id: GpnfNN
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Edit Dashboard"
+msgstr "Edit Dashboard"
+
+#. js-lingui-id: NZubw3
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Edit Layout"
+msgstr "Edit Layout"
+
+#. js-lingui-id: bKBhgb
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Experience"
+msgstr "Experience"
+
+#. js-lingui-id: GS+Mus
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Export"
+msgstr "Export"
+
+#. js-lingui-id: o9EvJO
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Export {objectMetadataLabel}"
+msgstr "Export {objectMetadataLabel}"
+
+#. js-lingui-id: gcpThs
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Export View"
+msgstr "Export View"
+
+#. js-lingui-id: q46CjD
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Export to PDF"
+msgstr "Export to PDF"
+
+#. js-lingui-id: PURhOU
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Go to AI Settings"
+msgstr "Go to AI Settings"
+
+#. js-lingui-id: yLNxLB
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Go to Accounts Settings"
+msgstr "Go to Accounts Settings"
+
+#. js-lingui-id: bXK4Dw
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Go to Admin Panel Settings"
+msgstr "Go to Admin Panel Settings"
+
+#. js-lingui-id: 9c7c5Q
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Go to Apps Settings"
+msgstr "Go to Apps Settings"
+
+#. js-lingui-id: f0UZyy
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Go to Billing Settings"
+msgstr "Go to Billing Settings"
+
+#. js-lingui-id: grGWgf
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Go to Calendars Settings"
+msgstr "Go to Calendars Settings"
+
+#. js-lingui-id: XYZBO5
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Go to Community Settings"
+msgstr "Go to Community Settings"
+
+#. js-lingui-id: xzAcR6
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Go to Data Model Settings"
+msgstr "Go to Data Model Settings"
+
+#. js-lingui-id: m+Jq8B
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Go to Domains Settings"
+msgstr "Go to Domains Settings"
+
+#. js-lingui-id: vijApc
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Go to Emails Settings"
+msgstr "Go to Emails Settings"
+
+#. js-lingui-id: hGyIXg
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Go to Experience Settings"
+msgstr "Go to Experience Settings"
+
+#. js-lingui-id: 7NpkPs
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Go to General Settings"
+msgstr "Go to General Settings"
+
+#. js-lingui-id: t4V8bk
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Go to MCP & APIs Settings"
+msgstr "Go to MCP & APIs Settings"
+
+#. js-lingui-id: NAtWEL
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Go to Members Settings"
+msgstr "Go to Members Settings"
+
+#. js-lingui-id: 2MkyHT
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Go to Roles Settings"
+msgstr "Go to Roles Settings"
+
+#. js-lingui-id: x4VP/P
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Go to Security Settings"
+msgstr "Go to Security Settings"
+
+#. js-lingui-id: mT57+Q
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Go to Settings"
+msgstr "Go to Settings"
+
+#. js-lingui-id: 7nFxG5
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Go to {navigateToObjectMetadataItemLabelPlural}"
+msgstr "Go to {navigateToObjectMetadataItemLabelPlural}"
+
+#. js-lingui-id: OlbYor
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Hide deleted"
+msgstr "Hide deleted"
+
+#. js-lingui-id: 2JBujc
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Hide deleted {objectMetadataItemLabelPlural}"
+msgstr "Hide deleted {objectMetadataItemLabelPlural}"
+
+#. js-lingui-id: l3s5ri
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Import"
+msgstr "Import"
+
+#. js-lingui-id: WYjc9P
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Import {objectMetadataItemLabelPlural}"
+msgstr "Import {objectMetadataItemLabelPlural}"
+
+#. js-lingui-id: r9gSmi
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "MCP & APIs"
+msgstr "MCP & APIs"
+
+#. js-lingui-id: UODtG8
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Merge"
+msgstr "Merge"
+
+#. js-lingui-id: ylLxLL
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Merge {objectMetadataItemLabelPlural}"
+msgstr "Merge {objectMetadataItemLabelPlural}"
+
+#. js-lingui-id: OWT2D4
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Navigate to next {objectMetadataItemLabelSingular}"
+msgstr "Navigate to next {objectMetadataItemLabelSingular}"
+
+#. js-lingui-id: P1ytBL
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "New {objectMetadataItemLabelSingular}"
+msgstr "New {objectMetadataItemLabelSingular}"
+
+#. js-lingui-id: yGfI61
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "New Campaign"
+msgstr "New Campaign"
+
+#. js-lingui-id: ZzV1BE
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Permanently destroy {objectMetadataLabel}"
+msgstr "Permanently destroy {objectMetadataLabel}"
+
+#. js-lingui-id: 2WAUd8
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Previous AI Chats"
+msgstr "Previous AI Chats"
+
+#. js-lingui-id: uDbQPV
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Remove from Favorites"
+msgstr "Remove from Favorites"
+
+#. js-lingui-id: ImOQa9
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Reply"
+msgstr "Reply"
+
+#. js-lingui-id: yKu/3Y
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Restore"
+msgstr "Restore"
+
+#. js-lingui-id: Uo36fA
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Restore {objectMetadataLabel}"
+msgstr "Restore {objectMetadataLabel}"
+
+#. js-lingui-id: 6gRgw8
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Retry"
+msgstr "Retry"
+
+#. js-lingui-id: 5dJK4M
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Roles"
+msgstr "Roles"
+
+#. js-lingui-id: tfDRzk
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Save"
+msgstr "Save"
+
+#. js-lingui-id: 7GK4Vt
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Save Dashboard"
+msgstr "Save Dashboard"
+
+#. js-lingui-id: a3LDKx
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Security"
+msgstr "Security"
+
+#. js-lingui-id: T7LCe3
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "See Active Version"
+msgstr "See Active Version"
+
+#. js-lingui-id: dcr/0m
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "See Runs"
+msgstr "See Runs"
+
+#. js-lingui-id: GtENl6
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "See Version"
+msgstr "See Version"
+
+#. js-lingui-id: I3NHuN
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "See Versions"
+msgstr "See Versions"
+
+#. js-lingui-id: qhdneQ
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "See Versions History"
+msgstr "See Versions History"
+
+#. js-lingui-id: TVoxl2
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "See Workflow"
+msgstr "See Workflow"
+
+#. js-lingui-id: 192+PY
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "See deleted {objectMetadataItemLabelPlural}"
+msgstr "See deleted {objectMetadataItemLabelPlural}"
+
+#. js-lingui-id: JlFcis
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Send"
+msgstr "Send"
+
+#. js-lingui-id: b7hiQs
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Send Campaign"
+msgstr "Send Campaign"
+
+#. js-lingui-id: 89aQ3n
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Send Test Email"
+msgstr "Send Test Email"
+
+#. js-lingui-id: ygCKqB
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Stop"
+msgstr "Stop"
+
+#. js-lingui-id: NnH3pK
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Test"
+msgstr "Test"
+
+#. js-lingui-id: bU9B27
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Test Workflow"
+msgstr "Test Workflow"
+
+#. js-lingui-id: 5g/sE8
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Tidy up"
+msgstr "Tidy up"
+
+#. js-lingui-id: sweMEg
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Tidy up Workflow"
+msgstr "Tidy up Workflow"
+
+#. js-lingui-id: ABx5QP
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Update {objectMetadataItemLabelPlural}"
+msgstr "Update {objectMetadataItemLabelPlural}"
+
+#. js-lingui-id: QOJEhr
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Use as Draft"
+msgstr "Use as Draft"
+
+#. js-lingui-id: ecVcAx
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "View Previous AI Chats"
+msgstr "View Previous AI Chats"
+
+#. js-lingui-id: gfaSZF
+#: src/engine/workspace-manager/twenty-standard-application/constants/standard-command-menu-item-i18n.constant.ts
+msgid "Navigate to previous {objectMetadataItemLabelSingular}"
+msgstr "Navigate to previous {objectMetadataItemLabelSingular}"

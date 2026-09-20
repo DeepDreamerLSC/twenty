@@ -1,12 +1,54 @@
 name: twenty
 
 services:
+  gateway:
+    image: nginx:1.27-alpine
+    ports:
+      - "127.0.0.1:3000:80"
+    volumes:
+      - ./gateway/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./gateway/account-login.html:/usr/share/nginx/html/account-login.html:ro
+      - ./gateway/change-password.html:/usr/share/nginx/html/change-password.html:ro
+      - ./gateway/guide.html:/usr/share/nginx/html/guide.html:ro
+    depends_on:
+      server:
+        condition: service_healthy
+      password-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: always
+
+  password-service:
+    image: twentycrm/twenty:${TAG:-latest}
+    working_dir: /app/packages/twenty-server
+    command: ["node", "password-service.cjs"]
+    volumes:
+      - ./gateway/password-service.cjs:/app/packages/twenty-server/password-service.cjs:ro
+    environment:
+      PASSWORD_SERVICE_PORT: 3020
+      PG_DATABASE_URL: postgres://${PG_DATABASE_USER:-postgres}:${PG_DATABASE_PASSWORD:-postgres}@${PG_DATABASE_HOST:-db}:${PG_DATABASE_PORT:-5432}/default
+      DISABLE_DB_MIGRATIONS: "true"
+      DISABLE_CRON_JOBS_REGISTRATION: "true"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: curl --fail http://localhost:3020/healthz
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: always
+
   server:
     image: twentycrm/twenty:${TAG:-latest}
     volumes:
       - server-local-data:/app/packages/twenty-server/.local-storage
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3001:3000"
     environment:
       NODE_PORT: 3000
       PG_DATABASE_URL: postgres://${PG_DATABASE_USER:-postgres}:${PG_DATABASE_PASSWORD:-postgres}@${PG_DATABASE_HOST:-db}:${PG_DATABASE_PORT:-5432}/default
@@ -23,6 +65,10 @@ services:
       ENCRYPTION_KEY: ${ENCRYPTION_KEY}
       FALLBACK_ENCRYPTION_KEY: ${FALLBACK_ENCRYPTION_KEY}
       APP_SECRET: ${APP_SECRET:-}
+      AUTH_PASSWORD_ENABLED: ${AUTH_PASSWORD_ENABLED:-true}
+      IS_EMAIL_VERIFICATION_REQUIRED: ${IS_EMAIL_VERIFICATION_REQUIRED:-false}
+      SIGN_IN_PREFILLED: ${SIGN_IN_PREFILLED:-false}
+      REFRESH_TOKEN_EXPIRES_IN: ${REFRESH_TOKEN_EXPIRES_IN:-30d}
       # MESSAGING_PROVIDER_GMAIL_ENABLED: ${MESSAGING_PROVIDER_GMAIL_ENABLED}
       # CALENDAR_PROVIDER_GOOGLE_ENABLED: ${CALENDAR_PROVIDER_GOOGLE_ENABLED}
       # AUTH_GOOGLE_CLIENT_ID: ${AUTH_GOOGLE_CLIENT_ID}

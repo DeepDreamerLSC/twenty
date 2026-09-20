@@ -1,5 +1,6 @@
-import { type I18n } from '@lingui/core';
+import { setupI18n } from '@lingui/core';
 
+import { generateMessageId } from 'src/engine/core-modules/i18n/utils/generateMessageId';
 import { CommandMenuItemAvailabilityType } from 'src/engine/metadata-modules/command-menu-item/enums/command-menu-item-availability-type.enum';
 import { EngineComponentKey } from 'src/engine/metadata-modules/command-menu-item/enums/engine-component-key.enum';
 import { interpolateNavigationCommandMenuItemField } from 'src/engine/metadata-modules/command-menu-item/utils/interpolate-navigation-command-menu-item-field.util';
@@ -10,9 +11,25 @@ import {
 } from 'src/engine/metadata-modules/flat-command-menu-item/utils/build-navigation-flat-command-menu-item.util';
 import { type ObjectMetadataDTO } from 'src/engine/metadata-modules/object-metadata/dtos/object-metadata.dto';
 
-const mockI18nInstance = {
-  _: (messageId: string) => messageId,
-} as unknown as I18n;
+const mockI18nInstance = setupI18n({ locale: 'en', messages: { en: {} } });
+
+const mockChineseI18nInstance = setupI18n({
+  locale: 'zh-CN',
+  messages: {
+    'zh-CN': {
+      [generateMessageId('Go to {navigateToObjectMetadataItemLabelPlural}')]: [
+        '前往 ',
+        ['navigateToObjectMetadataItemLabelPlural'],
+      ],
+      [generateMessageId('Import {objectMetadataItemLabelPlural}')]: [
+        '导入 ',
+        ['objectMetadataItemLabelPlural'],
+      ],
+      [generateMessageId('People')]: ['人员'],
+      [generateMessageId('Search')]: ['搜索'],
+    },
+  },
+});
 
 const mockObjectMetadata = {
   id: 'obj-id-1',
@@ -47,7 +64,8 @@ describe('interpolateNavigationCommandMenuItemField', () => {
       fieldName: 'label',
       objectMetadata: mockObjectMetadata,
       locale: undefined,
-      isStandardApp: true,
+      isStandardObjectMetadata: true,
+      isStandardCommandMenuItem: true,
       i18nInstance: mockI18nInstance,
     });
 
@@ -60,7 +78,8 @@ describe('interpolateNavigationCommandMenuItemField', () => {
       fieldName: 'shortLabel',
       objectMetadata: mockObjectMetadata,
       locale: undefined,
-      isStandardApp: true,
+      isStandardObjectMetadata: true,
+      isStandardCommandMenuItem: true,
       i18nInstance: mockI18nInstance,
     });
 
@@ -73,7 +92,8 @@ describe('interpolateNavigationCommandMenuItemField', () => {
       fieldName: 'icon',
       objectMetadata: mockObjectMetadata,
       locale: undefined,
-      isStandardApp: true,
+      isStandardObjectMetadata: true,
+      isStandardCommandMenuItem: true,
       i18nInstance: mockI18nInstance,
     });
 
@@ -93,7 +113,8 @@ describe('interpolateNavigationCommandMenuItemField', () => {
       fieldName: 'label',
       objectMetadata: null,
       locale: undefined,
-      isStandardApp: true,
+      isStandardObjectMetadata: true,
+      isStandardCommandMenuItem: true,
       i18nInstance: mockI18nInstance,
     });
 
@@ -106,7 +127,8 @@ describe('interpolateNavigationCommandMenuItemField', () => {
       fieldName: 'label',
       objectMetadata: null,
       locale: undefined,
-      isStandardApp: true,
+      isStandardObjectMetadata: true,
+      isStandardCommandMenuItem: true,
       i18nInstance: mockI18nInstance,
     });
 
@@ -124,7 +146,8 @@ describe('interpolateNavigationCommandMenuItemField', () => {
       fieldName: 'shortLabel',
       objectMetadata: mockObjectMetadata,
       locale: undefined,
-      isStandardApp: true,
+      isStandardObjectMetadata: true,
+      isStandardCommandMenuItem: true,
       i18nInstance: mockI18nInstance,
     });
 
@@ -143,7 +166,8 @@ describe('interpolateNavigationCommandMenuItemField', () => {
       fieldName: 'label',
       objectMetadata: customObjectMetadata,
       locale: undefined,
-      isStandardApp: true,
+      isStandardObjectMetadata: true,
+      isStandardCommandMenuItem: true,
       i18nInstance: mockI18nInstance,
     });
 
@@ -161,7 +185,8 @@ describe('interpolateNavigationCommandMenuItemField', () => {
       fieldName: 'icon',
       objectMetadata: customObjectMetadata,
       locale: undefined,
-      isStandardApp: true,
+      isStandardObjectMetadata: true,
+      isStandardCommandMenuItem: true,
       i18nInstance: mockI18nInstance,
     });
 
@@ -179,7 +204,8 @@ describe('interpolateNavigationCommandMenuItemField', () => {
       fieldName: 'label',
       objectMetadata: null,
       locale: undefined,
-      isStandardApp: true,
+      isStandardObjectMetadata: true,
+      isStandardCommandMenuItem: true,
       i18nInstance: mockI18nInstance,
     });
 
@@ -197,10 +223,82 @@ describe('interpolateNavigationCommandMenuItemField', () => {
       fieldName: 'label',
       objectMetadata: mockObjectMetadata,
       locale: undefined,
-      isStandardApp: true,
+      isStandardObjectMetadata: true,
+      isStandardCommandMenuItem: true,
       i18nInstance: mockI18nInstance,
     });
 
     expect(result).toBe('Go to People');
+  });
+
+  it('should translate a standard non-navigation command label', () => {
+    const result = interpolateNavigationCommandMenuItemField({
+      commandMenuItem: {
+        ...baseCommandMenuItem,
+        engineComponentKey: EngineComponentKey.SEARCH_RECORDS,
+        payload: undefined,
+        label: 'Search',
+      },
+      fieldName: 'label',
+      objectMetadata: null,
+      locale: 'zh-CN',
+      isStandardObjectMetadata: false,
+      isStandardCommandMenuItem: true,
+      i18nInstance: mockChineseI18nInstance,
+    });
+
+    expect(result).toBe('搜索');
+  });
+
+  it('should preserve a custom command label', () => {
+    const result = interpolateNavigationCommandMenuItemField({
+      commandMenuItem: {
+        ...baseCommandMenuItem,
+        engineComponentKey: EngineComponentKey.SEARCH_RECORDS,
+        payload: undefined,
+        label: 'Search',
+      },
+      fieldName: 'label',
+      objectMetadata: null,
+      locale: 'zh-CN',
+      isStandardObjectMetadata: false,
+      isStandardCommandMenuItem: false,
+      i18nInstance: mockChineseI18nInstance,
+    });
+
+    expect(result).toBe('Search');
+  });
+
+  it('should translate a standard command template before client interpolation', () => {
+    const result = interpolateNavigationCommandMenuItemField({
+      commandMenuItem: {
+        ...baseCommandMenuItem,
+        engineComponentKey: EngineComponentKey.IMPORT_RECORDS,
+        payload: undefined,
+        label: 'Import ${capitalize(objectMetadataItem.labelPlural)}',
+      },
+      fieldName: 'label',
+      objectMetadata: null,
+      locale: 'zh-CN',
+      isStandardObjectMetadata: false,
+      isStandardCommandMenuItem: true,
+      i18nInstance: mockChineseI18nInstance,
+    });
+
+    expect(result).toBe('导入 ${capitalize(objectMetadataItem.labelPlural)}');
+  });
+
+  it('should translate a navigation template and its standard object label', () => {
+    const result = interpolateNavigationCommandMenuItemField({
+      commandMenuItem: baseCommandMenuItem,
+      fieldName: 'label',
+      objectMetadata: mockObjectMetadata,
+      locale: 'zh-CN',
+      isStandardObjectMetadata: true,
+      isStandardCommandMenuItem: true,
+      i18nInstance: mockChineseI18nInstance,
+    });
+
+    expect(result).toBe('前往 人员');
   });
 });
